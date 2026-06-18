@@ -1,0 +1,561 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --preto: #0f0f0f;
+    --preto-2: #1a1a1a;
+    --verde: #15803d;
+    --verde-claro: #22c55e;
+    --laranja: #f97316;
+    --laranja-claro: #fb923c;
+    --branco: #ffffff;
+    --cinza: #f4f4f4;
+    --cinza-2: #e8e8e8;
+    --texto: #222222;
+    --texto-claro: #666666;
+    --borda: #dddddd;
+    --sombra: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cinza);
+    color: var(--texto);
+}
+
+/* TOPO */
+
+.topo-site {
+    background: var(--branco);
+    border-bottom: 4px solid var(--laranja);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.navbar {
+    padding: 12px 0;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-site {
+    width: 62px;
+    height: 62px;
+    object-fit: contain;
+}
+
+.marca-texto strong {
+    display: block;
+    color: var(--preto);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.marca-texto span {
+    display: block;
+    color: var(--verde);
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.menu-links .nav-link {
+    color: var(--preto);
+    font-weight: 700;
+    margin-left: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.menu-links .nav-link:hover,
+.menu-links .nav-link.ativo {
+    background: var(--laranja);
+    color: var(--branco);
+}
+
+.botao-menu {
+    border: 1px solid var(--laranja);
+}
+
+/* HERO PRINCIPAL */
+
+.hero-principal {
+    min-height: 620px;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,0.94), rgba(0,0,0,0.72), rgba(0,0,0,0.35)),
+        url("../assets/img/bg-carro.jpg");
+    background-size: cover;
+    background-position: center;
+    color: var(--branco);
+}
+
+.hero-overlay {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.hero-conteudo {
+    max-width: 720px;
+}
+
+.hero-tag {
+    display: inline-block;
+    background: var(--laranja);
+    color: var(--branco);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.hero-conteudo h1 {
+    font-size: 54px;
+    line-height: 1.05;
+    font-weight: 900;
+    margin-bottom: 22px;
+}
+
+.hero-conteudo p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: #dddddd;
+    max-width: 650px;
+}
+
+.hero-botoes {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.btn-laranja,
+.btn-contorno {
+    display: inline-block;
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 800;
+}
+
+.btn-laranja {
+    background: var(--laranja);
+    color: var(--branco);
+}
+
+.btn-laranja:hover {
+    background: var(--laranja-claro);
+    color: var(--preto);
+}
+
+.btn-contorno {
+    background: transparent;
+    color: var(--branco);
+    border: 2px solid var(--branco);
+}
+
+.btn-contorno:hover {
+    background: var(--branco);
+    color: var(--preto);
+}
+
+.hero-card-info {
+    background: rgba(15, 15, 15, 0.88);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-bottom: 6px solid var(--laranja);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 18px 38px rgba(0,0,0,0.35);
+}
+
+.hero-card-info h3 {
+    color: var(--branco);
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.hero-card-info p {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.hero-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-lista div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.08);
+    padding: 13px;
+    border-radius: 8px;
+    border-left: 4px solid var(--verde-claro);
+}
+
+.hero-lista strong {
+    color: var(--laranja);
+    font-size: 18px;
+}
+
+.hero-lista span {
+    color: var(--branco);
+    font-weight: 700;
+}
+
+/* SEÇÕES */
+
+.secao-servicos,
+.secao-sobre,
+.secao-galeria {
+    padding: 75px 0;
+}
+
+.secao-servicos {
+    background: var(--cinza);
+}
+
+.secao-sobre {
+    background: var(--branco);
+}
+
+.secao-galeria {
+    background: var(--cinza);
+}
+
+.titulo-secao {
+    max-width: 760px;
+    margin: 0 auto 42px auto;
+}
+
+.titulo-secao span,
+.sobre-texto span,
+.chamada-card span {
+    color: var(--laranja);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.titulo-secao h2,
+.sobre-texto h2 {
+    color: var(--preto);
+    font-size: 38px;
+    font-weight: 900;
+    margin: 10px 0;
+}
+
+.titulo-secao p,
+.sobre-texto p {
+    color: var(--texto-claro);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+/* CARDS SERVIÇOS */
+
+.servico-card {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-top: 6px solid var(--laranja);
+    border-radius: 12px;
+    padding: 28px;
+    height: 100%;
+    box-shadow: var(--sombra);
+}
+
+.icone-card {
+    width: 46px;
+    height: 46px;
+    background: var(--preto);
+    color: var(--branco);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.servico-card h3 {
+    color: var(--preto);
+    font-size: 23px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.servico-card p {
+    color: var(--texto-claro);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* SOBRE */
+
+.foto-empresa {
+    min-height: 380px;
+    background:
+        linear-gradient(135deg, rgba(0,0,0,0.70), rgba(0,0,0,0.20)),
+        url("../assets/img/foto-empresa.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 14px;
+    border-bottom: 6px solid var(--verde);
+    display: flex;
+    align-items: end;
+    padding: 28px;
+    color: var(--branco);
+    font-weight: 800;
+    box-shadow: var(--sombra);
+}
+
+.sobre-pontos {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sobre-pontos div {
+    background: var(--cinza);
+    border-left: 5px solid var(--laranja);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sobre-pontos strong {
+    background: var(--verde);
+    color: var(--branco);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sobre-pontos p {
+    margin: 0;
+    color: var(--texto);
+    font-weight: 700;
+}
+
+/* GALERIA */
+
+.galeria-box {
+    height: 250px;
+    background: linear-gradient(135deg, #dcdcdc, #ffffff);
+    border: 2px dashed #bdbdbd;
+    border-bottom: 6px solid var(--laranja);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto-claro);
+    font-weight: 800;
+}
+
+.galeria-box:hover {
+    border-color: var(--verde);
+    color: var(--verde);
+}
+
+/* CHAMADA */
+
+.secao-chamada {
+    padding: 35px 0 80px;
+    background: var(--cinza);
+}
+
+.chamada-card {
+    background: linear-gradient(135deg, var(--preto), var(--preto-2));
+    color: var(--branco);
+    padding: 38px;
+    border-radius: 14px;
+    border-bottom: 7px solid var(--laranja);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    box-shadow: var(--sombra);
+}
+
+.chamada-card h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 8px 0;
+}
+
+.chamada-card p {
+    color: #dddddd;
+    margin: 0;
+}
+
+/* FORMULÁRIOS E CATÁLOGO */
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid var(--borda);
+    padding: 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.15);
+}
+
+.form-catalogo {
+    background: var(--branco);
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid var(--borda);
+    box-shadow: var(--sombra);
+    margin-bottom: 25px;
+}
+
+.card-peca {
+    background: var(--branco);
+    border-radius: 10px;
+    padding: 22px;
+    height: 100%;
+    border: 1px solid var(--borda);
+    box-shadow: var(--sombra);
+}
+
+.categoria-peca {
+    display: inline-block;
+    background: var(--verde);
+    color: var(--branco);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.card-peca h3 {
+    color: var(--preto);
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.card-peca p {
+    color: var(--texto-claro);
+    margin-bottom: 12px;
+}
+
+.card-peca strong {
+    color: var(--laranja);
+    font-size: 20px;
+}
+
+/* RODAPÉ */
+
+.rodape {
+    background: var(--preto);
+    color: var(--branco);
+    text-align: center;
+    padding: 26px 0;
+}
+
+.rodape p {
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.rodape small {
+    color: #cccccc;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 992px) {
+    .hero-conteudo h1 {
+        font-size: 42px;
+    }
+
+    .hero-card-info {
+        margin-top: 20px;
+    }
+
+    .chamada-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chamada-card .btn-laranja {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-principal,
+    .hero-overlay {
+        min-height: auto;
+    }
+
+    .hero-overlay {
+        padding: 60px 0;
+    }
+
+    .hero-conteudo h1 {
+        font-size: 34px;
+    }
+
+    .hero-conteudo p {
+        font-size: 16px;
+    }
+
+    .hero-botoes {
+        flex-direction: column;
+    }
+
+    .btn-laranja,
+    .btn-contorno {
+        width: 100%;
+        text-align: center;
+    }
+
+    .titulo-secao h2,
+    .sobre-texto h2 {
+        font-size: 30px;
+    }
+
+    .foto-empresa {
+        min-height: 260px;
+    }
+
+    .marca-texto strong {
+        font-size: 20px;
+    }
+
+    .marca-texto span {
+        font-size: 12px;
+    }
+
+    .logo-site {
+        width: 52px;
+        height: 52px;
+    }
+}
