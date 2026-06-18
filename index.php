@@ -1,7 +1,7 @@
 <?php
 $page = $_GET['page'] ?? 'home';
 
-$allowedPages = ['home', 'servicos', 'pacotes', 'catalogo', 'agendamento', 'contato'];
+$allowedPages = ['home', 'servicos', 'catalogo', 'agendamento'];
 
 if (!in_array($page, $allowedPages)) {
     $page = 'home';
@@ -18,7 +18,7 @@ $pagePath = "pages/{$page}.php";
         if (file_exists($pagePath)) {
             include $pagePath;
         } else {
-            echo "<section class='secao'><div class='container'><h1>Página em construção</h1><p>Esta página ainda será criada.</p></div></section>";
+            include 'pages/home.php';
         }
     ?>
 </main>

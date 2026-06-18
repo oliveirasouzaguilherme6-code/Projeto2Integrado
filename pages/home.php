@@ -1,149 +1,51 @@
-<section class="hero-principal">
-    <div class="hero-overlay">
-        <div class="container">
-            <div class="row align-items-center">
-
-                <div class="col-lg-7">
-                    <div class="hero-conteudo">
-                        <span class="hero-tag">M&M Centro Estético Automotivo</span>
-
-                        <h1>Seu carro limpo, protegido e com acabamento de respeito.</h1>
-
-                        <p>
-                            Serviços de estética automotiva para quem valoriza brilho,
-                            cuidado, proteção da pintura e um veículo bem apresentado.
-                        </p>
-
-                        <div class="hero-botoes">
-                            <a href="index.php?page=servicos" class="btn-laranja">Conhecer serviços</a>
-                            <a href="index.php?page=agendamento" class="btn-contorno">Agendar avaliação</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-5">
-                    <div class="hero-card-info">
-                        <h3>Atendimento automotivo</h3>
-
-                        <p>
-                            Avaliamos o estado do veículo e indicamos o melhor cuidado
-                            para limpeza, polimento e conservação.
-                        </p>
-
-                        <div class="hero-lista">
-                            <div>
-                                <strong>01</strong>
-                                <span>Limpeza automotiva</span>
-                            </div>
-
-                            <div>
-                                <strong>02</strong>
-                                <span>Polimento e brilho</span>
-                            </div>
-
-                            <div>
-                                <strong>03</strong>
-                                <span>Proteção de pintura</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="secao-servicos">
-    <div class="container">
-
-        <div class="titulo-secao text-center">
-            <span>Serviços principais</span>
-            <h2>Cuidados que valorizam o veículo</h2>
-            <p>
-                A M&M trabalha com serviços simples, úteis e bem aplicados para melhorar
-                a aparência e conservação do carro.
-            </p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="servico-card">
-                    <div class="icone-card">01</div>
-                    <h3>Limpeza completa</h3>
-                    <p>
-                        Limpeza interna e externa para deixar o veículo mais agradável,
-                        organizado e bem cuidado.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="servico-card">
-                    <div class="icone-card">02</div>
-                    <h3>Polimento automotivo</h3>
-                    <p>
-                        Processo voltado para recuperar o brilho e melhorar a aparência
-                        da pintura do carro.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="servico-card">
-                    <div class="icone-card">03</div>
-                    <h3>Proteção de pintura</h3>
-                    <p>
-                        Cuidado para preservar o acabamento, reduzir desgaste visual e
-                        manter o veículo conservado.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<section class="secao-sobre">
+<section class="home-hero-clean">
     <div class="container">
         <div class="row align-items-center g-5">
 
-            <div class="col-lg-6">
-                <div class="foto-empresa">
-                    <span>Adicionar foto real da empresa ou veículo</span>
+            <div class="col-lg-7">
+                <div class="hero-clean-content">
+                    <span class="hero-clean-label">Centro Estético Automotivo</span>
+
+                    <h1>Cuidado completo para deixar seu veículo mais bonito e valorizado.</h1>
+
+                    <p>
+                        Serviços de estética automotiva, funilaria, pintura e troca de peças
+                        com atendimento organizado, acabamento bem feito e atenção aos detalhes.
+                    </p>
+
+                    <div class="hero-clean-actions">
+                        <a href="index.php?page=servicos" class="btn-main">Ver serviços</a>
+                        <a href="index.php?page=agendamento" class="btn-green">Solicitar avaliação</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="sobre-texto">
-                    <span>Sobre a M&M</span>
-
-                    <h2>Estética automotiva com foco em cuidado e acabamento</h2>
-
-                    <p>
-                        A M&M Centro Estético Automotivo atende clientes que desejam
-                        manter o veículo limpo, conservado e com boa aparência.
-                    </p>
+            <div class="col-lg-5">
+                <div class="hero-clean-box">
+                    <div class="hero-box-header">
+                        <span>M&M</span>
+                        <strong>Atendimento automotivo</strong>
+                    </div>
 
                     <p>
-                        O objetivo é oferecer serviços com organização, atenção aos
-                        detalhes e resultado visual de qualidade.
+                        Avaliamos o veículo e indicamos o melhor serviço conforme
+                        a necessidade do carro.
                     </p>
 
-                    <div class="sobre-pontos">
+                    <div class="hero-box-list">
                         <div>
-                            <strong>✓</strong>
-                            <p>Atendimento com avaliação do veículo</p>
+                            <strong>01</strong>
+                            <span>Estética automotiva</span>
                         </div>
 
                         <div>
-                            <strong>✓</strong>
-                            <p>Serviços voltados para limpeza e conservação</p>
+                            <strong>02</strong>
+                            <span>Funilaria e pintura</span>
                         </div>
 
                         <div>
-                            <strong>✓</strong>
-                            <p>Acabamento com cuidado nos detalhes</p>
+                            <strong>03</strong>
+                            <span>Troca de peças</span>
                         </div>
                     </div>
                 </div>
@@ -153,52 +55,142 @@
     </div>
 </section>
 
-<section class="secao-galeria">
+<section class="service-strip-clean">
+    <div class="container">
+        <div class="row g-3">
+
+            <div class="col-md-3">
+                <div class="strip-clean-box">
+                    <strong>Estética</strong>
+                    <span>Limpeza, polimento e proteção</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="strip-clean-box">
+                    <strong>Funilaria</strong>
+                    <span>Reparos e preparação</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="strip-clean-box">
+                    <strong>Pintura</strong>
+                    <span>Peças e acabamento</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="strip-clean-box">
+                    <strong>Peças</strong>
+                    <span>Troca e montagem</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="section">
     <div class="container">
 
-        <div class="titulo-secao text-center">
-            <span>Galeria</span>
-            <h2>Resultados e serviços realizados</h2>
-            <p>
-                Espaço para adicionar fotos reais dos carros atendidos pela empresa.
-            </p>
-        </div>
+        <div class="row align-items-center g-5">
 
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="galeria-box">
-                    <span>Antes do serviço</span>
+            <div class="col-lg-6">
+                <div class="photo-box">
+                    <span>Foto real da oficina</span>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="galeria-box">
-                    <span>Durante o processo</span>
+            <div class="col-lg-6">
+                <div class="section-title">
+                    <span>Sobre a empresa</span>
+                    <h2>Atendimento direto, organizado e focado no veículo.</h2>
+
+                    <p>
+                        A M&M Centro Estético Automotivo trabalha com serviços para aparência,
+                        reparo e conservação de veículos.
+                    </p>
+
+                    <p>
+                        O atendimento começa pela avaliação do carro, passa pelo orçamento
+                        e finaliza com a entrega do serviço revisado.
+                    </p>
+                </div>
+
+                <div class="plain-list">
+                    <div>Avaliação do estado do veículo</div>
+                    <div>Orçamento conforme o serviço necessário</div>
+                    <div>Execução com foco no acabamento</div>
+                    <div>Entrega revisada</div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="galeria-box">
-                    <span>Resultado final</span>
-                </div>
-            </div>
         </div>
 
     </div>
 </section>
 
-<section class="secao-chamada">
+<section class="section section-white">
     <div class="container">
-        <div class="chamada-card">
+
+        <div class="section-title center">
+            <span>Serviços</span>
+            <h2>Principais áreas de atendimento</h2>
+            <p>
+                Serviços voltados para estética, reparo, pintura e troca de peças.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="old-card">
+                    <strong>01</strong>
+                    <h3>Estética automotiva</h3>
+                    <p>
+                        Limpeza, polimento, proteção de pintura e conservação visual.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="old-card">
+                    <strong>02</strong>
+                    <h3>Funilaria e pintura</h3>
+                    <p>
+                        Reparos, preparação, pintura de peças e acabamento automotivo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="old-card">
+                    <strong>03</strong>
+                    <h3>Troca de peças</h3>
+                    <p>
+                        Troca, montagem e ajuste de peças externas conforme avaliação.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-box">
             <div>
-                <span>M&M Centro Estético Automotivo</span>
-                <h2>Agende uma avaliação para o seu carro</h2>
+                <span>Solicite uma avaliação</span>
+                <h2>Seu veículo precisa de cuidado?</h2>
                 <p>
-                    Escolha um serviço e solicite atendimento de forma simples.
+                    Entre em contato para orçamento de estética, pintura, funilaria ou peças.
                 </p>
             </div>
 
-            <a href="index.php?page=agendamento" class="btn-laranja">Agendar agora</a>
+            <a href="index.php?page=agendamento" class="btn-main">Agendar avaliação</a>
         </div>
     </div>
 </section>
