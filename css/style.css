@@ -886,6 +886,17 @@ button.btn-green {
     margin-bottom: 18px;
 }
 
+.message-success {
+    background: #eef7f0;
+    border-left-color: var(--green);
+    color: #0f6f35;
+}
+
+.message-error {
+    background: #fff1f1;
+    border-left-color: #c62828;
+    color: #8b0000;
+}
 /* =========================
    CTA
 ========================= */

@@ -1,72 +1,5 @@
 <?php
-$pecas = [
-    [
-        "nome" => "Para-choque dianteiro",
-        "categoria" => "Peças externas",
-        "descricao" => "Peça utilizada para substituição em veículos com danos na parte dianteira.",
-        "preco" => 450,
-        "condicao" => "Novo",
-        "origem" => "Paralela",
-        "imagem" => "parachoque-dianteiro.jpg",
-        "compatibilidade" => "Compatível conforme modelo e ano do veículo.",
-        "observacao" => "Valor pode variar conforme o modelo do carro e disponibilidade da peça."
-    ],
-    [
-        "nome" => "Para-choque traseiro",
-        "categoria" => "Peças externas",
-        "descricao" => "Indicado para troca em casos de trincas, quebras ou danos traseiros.",
-        "preco" => 480,
-        "condicao" => "Novo",
-        "origem" => "Paralela",
-        "imagem" => "parachoque-traseiro.jpg",
-        "compatibilidade" => "Necessário confirmar o modelo antes da compra.",
-        "observacao" => "Pode precisar de pintura antes da instalação."
-    ],
-    [
-        "nome" => "Retrovisor",
-        "categoria" => "Acessórios externos",
-        "descricao" => "Substituição de retrovisor danificado conforme modelo do veículo.",
-        "preco" => 180,
-        "condicao" => "Usado",
-        "origem" => "Original",
-        "imagem" => "retrovisor.jpg",
-        "compatibilidade" => "Compatível conforme lado, modelo e versão do veículo.",
-        "observacao" => "Peça usada em bom estado, sujeita à avaliação visual."
-    ],
-    [
-        "nome" => "Farol dianteiro",
-        "categoria" => "Iluminação",
-        "descricao" => "Troca de farol dianteiro para melhorar segurança e aparência.",
-        "preco" => 320,
-        "condicao" => "Novo",
-        "origem" => "Paralela",
-        "imagem" => "farol.jpg",
-        "compatibilidade" => "Compatibilidade depende do modelo e ano do veículo.",
-        "observacao" => "Pode haver diferença entre versões com máscara negra ou cromada."
-    ],
-    [
-        "nome" => "Lanterna traseira",
-        "categoria" => "Iluminação",
-        "descricao" => "Peça de reposição para veículos com lanterna quebrada ou danificada.",
-        "preco" => 260,
-        "condicao" => "Recondicionada",
-        "origem" => "Original",
-        "imagem" => "lanterna.jpg",
-        "compatibilidade" => "Confirmar lado esquerdo ou direito antes da instalação.",
-        "observacao" => "Peça revisada, indicada para reposição com melhor custo-benefício."
-    ],
-    [
-        "nome" => "Paralama",
-        "categoria" => "Lataria",
-        "descricao" => "Peça de lataria usada em reparos de colisão ou danos laterais.",
-        "preco" => 390,
-        "condicao" => "Novo",
-        "origem" => "Paralela",
-        "imagem" => "paralama.jpg",
-        "compatibilidade" => "Compatível conforme modelo, ano e lado do veículo.",
-        "observacao" => "Normalmente precisa de preparação e pintura antes da montagem."
-    ]
-];
+require_once __DIR__ . "/../config/database.php";
 
 function formatarPreco($valor) {
     if ($valor <= 0) {
@@ -76,12 +9,13 @@ function formatarPreco($valor) {
     return "R$ " . number_format($valor, 2, ',', '.');
 }
 
-function validarPeca($peca) {
-    if ($peca["nome"] == "" || $peca["preco"] < 0) {
-        return false;
-    }
-
-    return true;
+try {
+    $sql = "SELECT * FROM pecas WHERE ativo = 1 ORDER BY nome ASC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $pecas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $erro) {
+    die("Erro ao buscar peças: " . $erro->getMessage());
 }
 ?>
 
@@ -106,8 +40,9 @@ function validarPeca($peca) {
 
         <div class="catalog-grid" id="catalogGrid">
 
-            <?php foreach ($pecas as $peca): ?>
-                <?php if (validarPeca($peca)): ?>
+            <?php if (count($pecas) > 0): ?>
+
+                <?php foreach ($pecas as $peca): ?>
 
                     <article 
                         class="catalog-item"
@@ -116,25 +51,28 @@ function validarPeca($peca) {
                         <div class="catalog-card">
 
                             <div class="catalog-img">
-                                <img src="assets/img/pecas/<?php echo $peca['imagem']; ?>" alt="<?php echo $peca['nome']; ?>">
+                                <img 
+                                    src="assets/img/pecas/<?php echo htmlspecialchars($peca['imagem']); ?>" 
+                                    alt="<?php echo htmlspecialchars($peca['nome']); ?>"
+                                >
                             </div>
 
                             <div class="catalog-body">
 
                                 <div class="catalog-header">
-                                    <span><?php echo $peca["categoria"]; ?></span>
+                                    <span><?php echo htmlspecialchars($peca["categoria"]); ?></span>
                                     <strong><?php echo formatarPreco($peca["preco"]); ?></strong>
                                 </div>
 
-                                <h3><?php echo $peca["nome"]; ?></h3>
+                                <h3><?php echo htmlspecialchars($peca["nome"]); ?></h3>
 
                                 <p>
-                                    <?php echo $peca["descricao"]; ?>
+                                    <?php echo htmlspecialchars($peca["descricao"]); ?>
                                 </p>
 
                                 <div class="piece-tags">
-                                    <span><?php echo $peca["condicao"]; ?></span>
-                                    <span><?php echo $peca["origem"]; ?></span>
+                                    <span><?php echo htmlspecialchars($peca["condicao"]); ?></span>
+                                    <span><?php echo htmlspecialchars($peca["origem"]); ?></span>
                                 </div>
 
                                 <button 
@@ -158,8 +96,15 @@ function validarPeca($peca) {
                         </div>
                     </article>
 
-                <?php endif; ?>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+
+            <?php else: ?>
+
+                <div class="no-results" style="display:block;">
+                    Nenhuma peça cadastrada no banco de dados.
+                </div>
+
+            <?php endif; ?>
 
         </div>
 

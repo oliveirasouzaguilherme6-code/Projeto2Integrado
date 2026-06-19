@@ -1,17 +1,63 @@
 <?php
+require_once __DIR__ . "/../config/database.php";
+
 $mensagem = "";
+$tipoMensagem = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = $_POST["nome"] ?? "";
-    $telefone = $_POST["telefone"] ?? "";
-    $veiculo = $_POST["veiculo"] ?? "";
-    $servico = $_POST["servico"] ?? "";
-    $descricao = $_POST["descricao"] ?? "";
+    $nome = trim($_POST["nome"] ?? "");
+    $telefone = trim($_POST["telefone"] ?? "");
+    $veiculo = trim($_POST["veiculo"] ?? "");
+    $servico = trim($_POST["servico"] ?? "");
+    $descricao = trim($_POST["descricao"] ?? "");
 
     if ($nome == "" || $telefone == "" || $veiculo == "" || $servico == "") {
-        $mensagem = "Preencha os campos obrigatórios.";
+        $mensagem = "Preencha todos os campos obrigatórios.";
+        $tipoMensagem = "erro";
     } else {
-        $mensagem = "Solicitação enviada com sucesso. Em breve entraremos em contato.";
+        try {
+            $pdo->beginTransaction();
+
+            $sqlCliente = "INSERT INTO clientes (nome, telefone) VALUES (:nome, :telefone)";
+            $stmtCliente = $pdo->prepare($sqlCliente);
+            $stmtCliente->bindParam(":nome", $nome);
+            $stmtCliente->bindParam(":telefone", $telefone);
+            $stmtCliente->execute();
+
+            $idCliente = $pdo->lastInsertId();
+
+            $sqlVeiculo = "INSERT INTO veiculos (id_cliente, modelo) VALUES (:id_cliente, :modelo)";
+            $stmtVeiculo = $pdo->prepare($sqlVeiculo);
+            $stmtVeiculo->bindParam(":id_cliente", $idCliente);
+            $stmtVeiculo->bindParam(":modelo", $veiculo);
+            $stmtVeiculo->execute();
+
+            $idVeiculo = $pdo->lastInsertId();
+
+            $sqlAgendamento = "
+                INSERT INTO agendamentos 
+                (id_cliente, id_veiculo, servico_desejado, descricao, status) 
+                VALUES 
+                (:id_cliente, :id_veiculo, :servico_desejado, :descricao, 'Novo')
+            ";
+
+            $stmtAgendamento = $pdo->prepare($sqlAgendamento);
+            $stmtAgendamento->bindParam(":id_cliente", $idCliente);
+            $stmtAgendamento->bindParam(":id_veiculo", $idVeiculo);
+            $stmtAgendamento->bindParam(":servico_desejado", $servico);
+            $stmtAgendamento->bindParam(":descricao", $descricao);
+            $stmtAgendamento->execute();
+
+            $pdo->commit();
+
+            $mensagem = "Solicitação enviada com sucesso! Em breve entraremos em contato.";
+            $tipoMensagem = "sucesso";
+
+        } catch (PDOException $erro) {
+            $pdo->rollBack();
+            $mensagem = "Erro ao salvar solicitação: " . $erro->getMessage();
+            $tipoMensagem = "erro";
+        }
     }
 }
 ?>
@@ -37,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         A solicitação ajuda a entender melhor o serviço antes do orçamento.
                     </p>
 
-                    <div class="clean-list">
+                    <div class="plain-list">
                         <div>Estética automotiva</div>
                         <div>Funilaria e pintura</div>
                         <div>Troca de peças</div>
@@ -50,8 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-card">
 
                     <?php if ($mensagem != ""): ?>
-                        <div class="message-box">
-                            <?php echo $mensagem; ?>
+                        <div class="message-box <?php echo $tipoMensagem == 'erro' ? 'message-error' : 'message-success'; ?>">
+                            <?php echo htmlspecialchars($mensagem); ?>
                         </div>
                     <?php endif; ?>
 
@@ -61,22 +107,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="col-md-6">
                                 <label>Nome completo *</label>
-                                <input type="text" name="nome" class="form-control" placeholder="Digite seu nome">
+                                <input 
+                                    type="text" 
+                                    name="nome" 
+                                    class="form-control" 
+                                    placeholder="Digite seu nome"
+                                    required
+                                >
                             </div>
 
                             <div class="col-md-6">
                                 <label>Telefone / WhatsApp *</label>
-                                <input type="text" name="telefone" class="form-control" placeholder="(44) 99999-9999">
+                                <input 
+                                    type="text" 
+                                    name="telefone" 
+                                    class="form-control" 
+                                    placeholder="(44) 99999-9999"
+                                    required
+                                >
                             </div>
 
                             <div class="col-md-6">
                                 <label>Veículo *</label>
-                                <input type="text" name="veiculo" class="form-control" placeholder="Ex: Corolla 2018">
+                                <input 
+                                    type="text" 
+                                    name="veiculo" 
+                                    class="form-control" 
+                                    placeholder="Ex: Corolla 2018"
+                                    required
+                                >
                             </div>
 
                             <div class="col-md-6">
                                 <label>Serviço desejado *</label>
-                                <select name="servico" class="form-select">
+                                <select name="servico" class="form-select" required>
                                     <option value="">Selecione</option>
                                     <option value="Estética automotiva">Estética automotiva</option>
                                     <option value="Funilaria">Funilaria</option>
@@ -88,11 +152,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="col-12">
                                 <label>Descrição</label>
-                                <textarea name="descricao" class="form-control" rows="5" placeholder="Descreva o que precisa ser feito"></textarea>
+                                <textarea 
+                                    name="descricao" 
+                                    class="form-control" 
+                                    rows="5" 
+                                    placeholder="Descreva o que precisa ser feito"
+                                ></textarea>
                             </div>
 
                             <div class="col-12">
-                                <button type="submit" class="btn-primary-mm">
+                                <button type="submit" class="btn-main">
                                     Enviar solicitação
                                 </button>
                             </div>
