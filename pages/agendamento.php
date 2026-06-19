@@ -4,15 +4,24 @@ require_once __DIR__ . "/../config/database.php";
 $mensagem = "";
 $tipoMensagem = "";
 
+try {
+    $sqlServicos = "SELECT id_servico, nome, categoria FROM servicos WHERE ativo = 1 ORDER BY categoria, nome";
+    $stmtServicos = $pdo->prepare($sqlServicos);
+    $stmtServicos->execute();
+    $servicosDisponiveis = $stmtServicos->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $erro) {
+    die("Erro ao buscar serviços: " . $erro->getMessage());
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = trim($_POST["nome"] ?? "");
     $telefone = trim($_POST["telefone"] ?? "");
     $veiculo = trim($_POST["veiculo"] ?? "");
-    $servico = trim($_POST["servico"] ?? "");
     $descricao = trim($_POST["descricao"] ?? "");
+    $servicosSelecionados = $_POST["servicos"] ?? [];
 
-    if ($nome == "" || $telefone == "" || $veiculo == "" || $servico == "") {
-        $mensagem = "Preencha todos os campos obrigatórios.";
+    if ($nome == "" || $telefone == "" || $veiculo == "" || empty($servicosSelecionados)) {
+        $mensagem = "Preencha todos os campos obrigatórios e selecione pelo menos um serviço.";
         $tipoMensagem = "erro";
     } else {
         try {
@@ -34,6 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $idVeiculo = $pdo->lastInsertId();
 
+            $idsValidos = array_map("intval", $servicosSelecionados);
+            $placeholders = implode(",", array_fill(0, count($idsValidos), "?"));
+
+            $sqlBuscaNomes = "SELECT nome FROM servicos WHERE id_servico IN ($placeholders)";
+            $stmtBuscaNomes = $pdo->prepare($sqlBuscaNomes);
+            $stmtBuscaNomes->execute($idsValidos);
+            $nomesServicos = $stmtBuscaNomes->fetchAll(PDO::FETCH_COLUMN);
+
+            $servicoTexto = implode(", ", $nomesServicos);
+
             $sqlAgendamento = "
                 INSERT INTO agendamentos 
                 (id_cliente, id_veiculo, servico_desejado, descricao, status) 
@@ -44,9 +63,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmtAgendamento = $pdo->prepare($sqlAgendamento);
             $stmtAgendamento->bindParam(":id_cliente", $idCliente);
             $stmtAgendamento->bindParam(":id_veiculo", $idVeiculo);
-            $stmtAgendamento->bindParam(":servico_desejado", $servico);
+            $stmtAgendamento->bindParam(":servico_desejado", $servicoTexto);
             $stmtAgendamento->bindParam(":descricao", $descricao);
             $stmtAgendamento->execute();
+
+            $idAgendamento = $pdo->lastInsertId();
+
+            $sqlAgendamentoServico = "
+                INSERT INTO agendamento_servicos 
+                (id_agendamento, id_servico) 
+                VALUES 
+                (:id_agendamento, :id_servico)
+            ";
+
+            $stmtAgendamentoServico = $pdo->prepare($sqlAgendamentoServico);
+
+            foreach ($idsValidos as $idServico) {
+                $stmtAgendamentoServico->bindParam(":id_agendamento", $idAgendamento);
+                $stmtAgendamentoServico->bindParam(":id_servico", $idServico);
+                $stmtAgendamentoServico->execute();
+            }
 
             $pdo->commit();
 
@@ -69,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span>Agendamento</span>
             <h1>Solicite uma avaliação</h1>
             <p>
-                Informe os dados do veículo e o serviço desejado para organizar o atendimento.
+                Informe os dados do veículo, selecione os serviços desejados e descreva o que precisa ser feito.
             </p>
         </div>
 
@@ -84,10 +120,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </p>
 
                     <div class="plain-list">
-                        <div>Estética automotiva</div>
-                        <div>Funilaria e pintura</div>
-                        <div>Troca de peças</div>
-                        <div>Orçamento sob avaliação</div>
+                        <div>Selecione um ou mais serviços</div>
+                        <div>Descreva os detalhes do veículo</div>
+                        <div>A equipe avalia a solicitação</div>
+                        <div>Orçamento sob análise</div>
                     </div>
                 </div>
             </div>
@@ -127,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 >
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-12">
                                 <label>Veículo *</label>
                                 <input 
                                     type="text" 
@@ -138,25 +174,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 >
                             </div>
 
-                            <div class="col-md-6">
-                                <label>Serviço desejado *</label>
-                                <select name="servico" class="form-select" required>
-                                    <option value="">Selecione</option>
-                                    <option value="Estética automotiva">Estética automotiva</option>
-                                    <option value="Funilaria">Funilaria</option>
-                                    <option value="Pintura">Pintura</option>
-                                    <option value="Troca de peças">Troca de peças</option>
-                                    <option value="Outro">Outro</option>
-                                </select>
+                            <div class="col-12">
+                                <label>Serviços desejados *</label>
+
+                                <div class="services-checkbox-area">
+                                    <?php foreach ($servicosDisponiveis as $servico): ?>
+                                        <label class="service-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="servicos[]" 
+                                                value="<?php echo $servico['id_servico']; ?>"
+                                            >
+
+                                            <span>
+                                                <strong><?php echo htmlspecialchars($servico["nome"]); ?></strong>
+                                                <small><?php echo htmlspecialchars($servico["categoria"]); ?></small>
+                                            </span>
+                                        </label>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
 
                             <div class="col-12">
-                                <label>Descrição</label>
+                                <label>Descrição detalhada</label>
                                 <textarea 
                                     name="descricao" 
                                     class="form-control" 
-                                    rows="5" 
-                                    placeholder="Descreva o que precisa ser feito"
+                                    rows="6" 
+                                    placeholder="Explique o que aconteceu, qual parte do veículo precisa de atenção, se há amassado, risco, peça quebrada, pintura danificada ou outro detalhe importante."
                                 ></textarea>
                             </div>
 

@@ -1,10 +1,10 @@
 <?php
 
-$host = "127.0.0.1";
+$host = "192.168.1.92";
 $porta = "3306";
 $banco = "mm_centro_automotivo";
-$usuario = "root";
-$senha = "";
+$usuario = "mm_user";
+$senha = "123456";
 
 try {
     $pdo = new PDO(

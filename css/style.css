@@ -6,7 +6,6 @@
 
 :root {
     --black: #111111;
-    --dark: #1c1c1c;
     --orange: #f36c12;
     --green: #159447;
     --green-dark: #0f6f35;
@@ -16,12 +15,21 @@
     --gray-light: #f7f7f7;
     --gray-text: #555555;
     --border: #d1d1d1;
+    --red: #c62828;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: var(--gray-bg);
     color: #222222;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
 }
 
 /* =========================
@@ -45,7 +53,6 @@ body {
     display: flex;
     align-items: center;
     gap: 14px;
-    text-decoration: none;
 }
 
 .brand-logo-area {
@@ -111,7 +118,6 @@ body {
 ========================= */
 
 .btn-main,
-.btn-outline,
 .btn-card,
 .btn-green {
     display: inline-block;
@@ -120,6 +126,7 @@ body {
     padding: 13px 20px;
     border: 2px solid transparent;
     border-radius: 0;
+    cursor: pointer;
 }
 
 .btn-main {
@@ -144,24 +151,21 @@ body {
     color: var(--white);
 }
 
-.btn-outline {
-    background: transparent;
-    color: var(--green);
-    border-color: var(--green);
+.btn-card {
+    background: var(--black);
+    color: var(--white);
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
 }
 
-.btn-outline:hover {
+.btn-card:hover {
     background: var(--green);
     color: var(--white);
 }
 
-button.btn-main,
-button.btn-green {
-    cursor: pointer;
-}
-
 /* =========================
-   HOME HERO CLARO
+   HOME
 ========================= */
 
 .home-hero-clean {
@@ -171,10 +175,6 @@ button.btn-green {
         linear-gradient(135deg, #ffffff 0%, #f6fbf8 45%, #eaf6ef 100%);
     padding: 95px 0;
     border-bottom: 4px solid var(--green);
-}
-
-.hero-clean-content {
-    max-width: 780px;
 }
 
 .hero-clean-label {
@@ -214,7 +214,7 @@ button.btn-green {
     border: 1px solid var(--border);
     border-top: 6px solid var(--green);
     padding: 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
 .hero-box-header {
@@ -269,105 +269,17 @@ button.btn-green {
     font-weight: 900;
 }
 
-/* Compatibilidade caso a home ainda use classes antigas */
-
-.home-hero {
-    background:
-        radial-gradient(circle at 12% 22%, rgba(21, 148, 71, 0.18), transparent 28%),
-        radial-gradient(circle at 82% 30%, rgba(243, 108, 18, 0.10), transparent 24%),
-        linear-gradient(135deg, #ffffff 0%, #f6fbf8 45%, #eaf6ef 100%);
-    color: var(--black);
-    border-bottom: 4px solid var(--green);
-    min-height: auto;
-}
-
-.home-overlay {
-    min-height: auto;
-    display: flex;
-    align-items: center;
-    padding: 95px 0;
-}
-
-.hero-label {
-    display: inline-block;
-    background: var(--green);
-    color: var(--white);
-    font-weight: 900;
-    padding: 8px 16px;
-    margin-bottom: 20px;
-}
-
-.hero-content h1 {
-    color: var(--black);
-    font-size: 52px;
-    line-height: 1.06;
-    font-weight: 900;
-    max-width: 800px;
-    margin-bottom: 22px;
-}
-
-.hero-content p {
-    color: var(--gray-text);
-    font-size: 19px;
-    line-height: 1.7;
-    max-width: 680px;
-}
-
-.hero-actions {
-    margin-top: 30px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.hero-info-box {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-top: 6px solid var(--green);
-    padding: 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-}
-
-.hero-info-box h3 {
-    color: var(--black);
-    font-size: 26px;
-    font-weight: 900;
-    margin-bottom: 12px;
-}
-
-.hero-info-box p {
-    color: var(--gray-text);
-    line-height: 1.6;
-}
-
-.hero-info-box ul {
-    list-style: none;
-    padding: 0;
-    margin: 18px 0 0;
-}
-
-.hero-info-box li {
-    background: #f4f4f4;
-    color: var(--black);
-    border-left: 5px solid var(--green);
-    padding: 12px;
-    margin-bottom: 8px;
-    font-weight: 900;
-}
-
 /* =========================
-   STRIP / FAIXA DE SERVIÇOS
+   FAIXA DE SERVIÇOS
 ========================= */
 
-.service-strip-clean,
-.service-strip {
+.service-strip-clean {
     background: var(--white);
     padding: 24px 0;
     border-bottom: 1px solid var(--border);
 }
 
-.strip-clean-box,
-.strip-box {
+.strip-clean-box {
     background: #f5fbf7;
     border: 1px solid #dbe7df;
     border-left: 5px solid var(--green);
@@ -375,8 +287,7 @@ button.btn-green {
     height: 100%;
 }
 
-.strip-clean-box strong,
-.strip-box strong {
+.strip-clean-box strong {
     display: block;
     color: var(--green);
     font-size: 20px;
@@ -384,15 +295,14 @@ button.btn-green {
     margin-bottom: 4px;
 }
 
-.strip-clean-box span,
-.strip-box span {
+.strip-clean-box span {
     color: var(--black);
     font-weight: 900;
     font-size: 14px;
 }
 
 /* =========================
-   SEÇÕES GERAIS
+   SEÇÕES
 ========================= */
 
 .section {
@@ -401,6 +311,10 @@ button.btn-green {
 
 .section-white {
     background: var(--white);
+}
+
+.page-top {
+    padding-top: 58px;
 }
 
 .section-title {
@@ -445,7 +359,7 @@ button.btn-green {
 .photo-box {
     min-height: 360px;
     background-image:
-        linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.08)),
+        linear-gradient(135deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.08)),
         url("../assets/img/foto-empresa.jpeg");
     background-size: cover;
     background-position: center;
@@ -459,15 +373,13 @@ button.btn-green {
     font-weight: 900;
 }
 
-.plain-list,
-.clean-list {
+.plain-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.plain-list div,
-.clean-list div {
+.plain-list div {
     background: var(--white);
     border: 1px solid var(--border);
     border-left: 5px solid var(--green);
@@ -476,7 +388,7 @@ button.btn-green {
 }
 
 /* =========================
-   CARDS GERAIS
+   CARDS
 ========================= */
 
 .old-card,
@@ -519,12 +431,8 @@ button.btn-green {
 }
 
 /* =========================
-   PÁGINAS INTERNAS
+   SERVIÇOS
 ========================= */
-
-.page-top {
-    padding-top: 58px;
-}
 
 .filter-area {
     display: flex;
@@ -554,19 +462,6 @@ button.btn-green {
     font-size: 13px;
     font-weight: 900;
     text-transform: uppercase;
-}
-
-.btn-card {
-    background: var(--black);
-    color: var(--white);
-    margin-top: 15px;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.btn-card:hover {
-    background: var(--green);
-    color: var(--white);
 }
 
 /* =========================
@@ -603,10 +498,6 @@ button.btn-green {
     gap: 24px;
 }
 
-.catalog-item {
-    display: block;
-}
-
 .catalog-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -629,11 +520,6 @@ button.btn-green {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.catalog-img img[src=""],
-.catalog-img img:not([src]) {
-    display: none;
 }
 
 .catalog-body {
@@ -693,11 +579,6 @@ button.btn-green {
     font-weight: 900;
 }
 
-.btn-detalhes {
-    border: none;
-    cursor: pointer;
-}
-
 .no-results {
     display: none;
     background: var(--white);
@@ -708,7 +589,7 @@ button.btn-green {
 }
 
 /* =========================
-   MODAL DA PEÇA
+   MODAL
 ========================= */
 
 .modal-aberto {
@@ -739,7 +620,7 @@ button.btn-green {
     overflow-y: auto;
     padding: 30px;
     position: relative;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
 }
 
 .fechar-modal {
@@ -774,11 +655,6 @@ button.btn-green {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.modal-img img[src=""],
-.modal-img img:not([src]) {
-    display: none;
 }
 
 .modal-categoria {
@@ -854,10 +730,6 @@ button.btn-green {
    AGENDAMENTO
 ========================= */
 
-.info-side {
-    border-top-color: var(--green);
-}
-
 .form-card label {
     display: block;
     font-weight: 800;
@@ -878,8 +750,54 @@ button.btn-green {
     box-shadow: none;
 }
 
-.message-box {
+.services-checkbox-area {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.service-checkbox {
+    background: #f7f7f7;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--green);
+    padding: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.service-checkbox:hover {
     background: #eef7f0;
+    border-color: var(--green);
+}
+
+.service-checkbox input {
+    margin-top: 4px;
+    accent-color: var(--green);
+}
+
+.service-checkbox span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.service-checkbox strong {
+    color: var(--black);
+    font-weight: 900;
+}
+
+.service-checkbox small {
+    color: var(--green);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.message-box {
     border-left: 5px solid var(--green);
     padding: 14px;
     font-weight: 800;
@@ -889,16 +807,17 @@ button.btn-green {
 .message-success {
     background: #eef7f0;
     border-left-color: var(--green);
-    color: #0f6f35;
+    color: var(--green-dark);
 }
 
 .message-error {
     background: #fff1f1;
-    border-left-color: #c62828;
+    border-left-color: var(--red);
     color: #8b0000;
 }
+
 /* =========================
-   CTA
+   CTA / FOOTER
 ========================= */
 
 .cta-section {
@@ -931,10 +850,6 @@ button.btn-green {
     margin: 0;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 .footer {
     background: var(--black);
     color: var(--white);
@@ -957,13 +872,11 @@ button.btn-green {
 ========================= */
 
 @media (max-width: 992px) {
-    .hero-clean-content h1,
-    .hero-content h1 {
+    .hero-clean-content h1 {
         font-size: 42px;
     }
 
-    .hero-clean-box,
-    .hero-info-box {
+    .hero-clean-box {
         margin-top: 10px;
     }
 
@@ -977,6 +890,10 @@ button.btn-green {
         margin-top: 5px;
     }
 
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .cta-box {
         flex-direction: column;
         align-items: flex-start;
@@ -986,10 +903,6 @@ button.btn-green {
         width: 100%;
         text-align: center;
     }
-
-    .catalog-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media (max-width: 768px) {
@@ -997,32 +910,19 @@ button.btn-green {
         padding: 60px 0;
     }
 
-    .home-hero,
-    .home-overlay {
-        min-height: auto;
-    }
-
-    .home-overlay {
-        padding: 60px 0;
-    }
-
-    .hero-clean-content h1,
-    .hero-content h1 {
+    .hero-clean-content h1 {
         font-size: 34px;
     }
 
-    .hero-clean-content p,
-    .hero-content p {
+    .hero-clean-content p {
         font-size: 16px;
     }
 
-    .hero-clean-actions,
-    .hero-actions {
+    .hero-clean-actions {
         flex-direction: column;
     }
 
     .btn-main,
-    .btn-outline,
     .btn-green {
         width: 100%;
         text-align: center;
@@ -1033,17 +933,16 @@ button.btn-green {
         height: 52px;
     }
 
-    .brand-logo {
-        width: 64px;
-        height: 48px;
-    }
-
     .brand-text strong {
         font-size: 20px;
     }
 
     .brand-text span {
         font-size: 12px;
+    }
+
+    .section {
+        padding: 55px 0;
     }
 
     .section-title h1 {
@@ -1059,6 +958,15 @@ button.btn-green {
     }
 
     .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog-header {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .services-checkbox-area {
         grid-template-columns: 1fr;
     }
 
@@ -1081,5 +989,36 @@ button.btn-green {
 
     .modal-conteudo h2 {
         font-size: 28px;
+    }
+}
+
+@media (max-width: 420px) {
+    .brand {
+        gap: 10px;
+    }
+
+    .brand-logo-area {
+        width: 62px;
+        height: 48px;
+    }
+
+    .brand-text strong {
+        font-size: 18px;
+    }
+
+    .brand-text span {
+        font-size: 11px;
+    }
+
+    .hero-clean-content h1 {
+        font-size: 30px;
+    }
+
+    .old-card,
+    .service-list-card,
+    .step-card,
+    .form-card,
+    .info-side {
+        padding: 20px;
     }
 }
